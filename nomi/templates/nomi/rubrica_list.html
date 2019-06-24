@@ -1,0 +1,21 @@
+{% extends 'nomi/base.html' %}
+
+{% block content %}
+	{% if request.user.is_authenticated %}
+		{% for nomi in rubricas %}
+			<div class="post">
+				<div class="date">
+					<h4>Telefono: {{ nomi.telefono }}</h4>
+				</div>
+				<h1><a href="{% url 'rubrica_dettaglio' pk=nomi.pk %}">{{ nomi.nome }}</a></h1>
+				<a class="btn btn-default" title="Modifica contatto" href="{% url 'rubrica_edit' pk=nomi.pk%}"><span class="glyphicon glyphicon-pencil"></span></a>
+				<a class="btn btn-default" title="Elimina contatto e tutti i numeri diretti collegati" href="{% url 'rubrica_delete' pk=nomi.pk%}"><span class="glyphicon glyphicon-minus"></span></a>
+
+				
+
+				<p>{{ nomi.indirizzo|linebreaksbr }}</p>
+				<hr>
+			</div>
+		{% endfor %}
+	{% endif %}
+{% endblock %}
